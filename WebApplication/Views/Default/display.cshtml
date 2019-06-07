@@ -1,0 +1,30 @@
+@{
+    ViewBag.Title = "display";
+}
+<div>
+    <img src="/photoes/export-map-share.png" alt="map" style="width:100%;height:100%"/>
+    <DIV id="positionDiv" style="position:absolute; top:0px; width:100%; height:100%">
+        <canvas id="Canvas"></canvas>
+    </DIV>
+</div>
+
+<script>
+    var canvas = document.getElementById("Canvas");
+    var ctx = canvas.getContext("2d");
+
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+
+    var lat = ((windowHeight / 2) + @Session["lat"] * (windowHeight / 180)) % 180;
+    var lon = (windowWidth / 2) + @Session["lon"] * (windowWidth / 360) % 360;
+
+    canvas.width = windowWidth;
+    canvas.height = windowHeight;
+
+    ctx.beginPath();
+    ctx.arc(lat, lon, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+</script>
+
